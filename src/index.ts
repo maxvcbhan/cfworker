@@ -8,26 +8,18 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export interface Env {
- 
-}
 
 export default {
 	async fetch(
 		request: Request,
-		env: Env,
+		env: any,
 		ctx: ExecutionContext
 	): Promise<Response> {
-
 		const body = await request.json()
 		await env.pm25.put(`pm25-${(new Date()).getTime()}.json`, JSON.stringify(body), {
 			httpMetadata: request.headers,
-
 		});
-
 		console.log(JSON.stringify( body))
-		return new Response("Hello World! tf1");
+		return new Response("Ok");
 	},
-
-
 };
